@@ -1,0 +1,54 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1" routerLink="/postslist">Post Management Demo</span>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <span class="h3">Posts</span>
+      <span class="float-end">
+        Total Comments: {{ comments.length }}
+      </span>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th scope="col">UserId</th>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Body</th>
+            <th scope="col" colspan="2" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts">
+            <th scope="row">{{ post.userId }}</th>
+            <td>{{ post.id }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.body }}</td>
+            <td>
+              <button
+                (click)="onedit(post)"
+                type="button"
+                class="btn btn-primary mr-3"
+              >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="onDelete(post.id)"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

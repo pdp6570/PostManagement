@@ -1,0 +1,64 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container">
+    <span class="navbar-brand mb-0 h1" routerLink="/postslist">Post Management Demo</span>
+    <a routerLink="/postslist"><button type="button" class="btn btn-light">Page List</button></a>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <span class="h3">Post Details</span>
+      <button *ngIf="!isFormIsInEditMode" class="btn btn-sm btn-primary float-end"
+        (click)="isFormIsInEditMode = !isFormIsInEditMode">
+        Edit Details
+      </button>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="postDetailForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Title</label>
+          <input type="text" class="form-control" formControlName="title" [readonly]="!isFormIsInEditMode" />
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Body</label>
+          <textarea class="form-control" formControlName="body" rows="4" [readonly]="!isFormIsInEditMode"></textarea>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isFormIsInEditMode" class="card-footer">
+      <div class="float-end">
+      <button class="btn btn-sm btn-secondary mx-2" (click)="onClickCancel()">
+        Cancel
+      </button>
+      <button class="btn btn-sm btn-primary" (click)="savePostDetails()">
+        Update
+      </button>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <span class="h3">Comments</span>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Body</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comment of comments">
+            <td>{{ comment.name }}</td>
+            <td>{{ comment.email }}</td>
+            <td><span appTextLength>{{ comment.body }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
